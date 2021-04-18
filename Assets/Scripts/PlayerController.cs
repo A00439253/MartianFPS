@@ -7,8 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float verticleTopClamp = -70f;
-    [SerializeField] float verticleBottomClamp = 80f;
+    [SerializeField] float verticalTopClamp = -70f;
+    [SerializeField] float verticalBottomClamp = 80f;
     [SerializeField] float playerSpeed = 5f;
     [SerializeField] float mouseSensitivity = 45f;
     [SerializeField] Camera playerCamera;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         //Horizontal Cam Calculations
         camX_rot -= mouseY;
         //Vertical Cam calculations with clamping
-        camX_rot = Mathf.Clamp(camX_rot, verticleTopClamp, verticleBottomClamp);
+        camX_rot = Mathf.Clamp(camX_rot, verticalTopClamp, verticalBottomClamp);
 
         playerCamera.transform.localRotation = Quaternion.Euler(camX_rot, 0, 0);
         //Player rotation along with Cam.
