@@ -19,14 +19,19 @@ public class Weapon : MonoBehaviour
         {
             if (Time.time > shootRateTimestamp)
             {
-                GameObject gObj = Instantiate(
-                    bulletPrefab, 
-                    weaponHolder.position, 
-                    weaponHolder.rotation);
-
-                gObj.GetComponent<Rigidbody>().AddForce(weaponHolder.forward * shootForce);
-                shootRateTimestamp = Time.time + shootRate;
+                shoot();
             }
         }
+    }
+
+    public void shoot()
+    {
+        GameObject gObj = Instantiate(
+            bulletPrefab, 
+            weaponHolder.position, 
+            weaponHolder.rotation);
+
+        gObj.GetComponent<Rigidbody>().AddForce(weaponHolder.forward * shootForce);
+        shootRateTimestamp = Time.time + shootRate;
     }
 }
