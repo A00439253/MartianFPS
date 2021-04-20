@@ -14,10 +14,11 @@ public class Weapon : MonoBehaviour
 
     public BulletTypes bulletTypes = BulletTypes.StraightBullet;
     public GameObject bulletPrefab;
+    public bool bIsManual = false;
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if(bIsManual && Input.GetKey(KeyCode.Space))
         {
             if (Time.time > shootRateTimestamp)
             {
