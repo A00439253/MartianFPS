@@ -279,7 +279,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3889429916329812438}
-  m_LocalRotation: {x: -0.6802709, y: -0, z: -0, w: 0.7329608}
+  m_LocalRotation: {x: -0.6802733, y: 0, z: 0, w: 0.7329586}
   m_LocalPosition: {x: 0, y: 3.2, z: 0.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -299,9 +299,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99f6ca1cabae7a49a45bb15e3a7c998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RocketTarget: {fileID: 0}
-  RocketRgb: {fileID: 3889429916329812435}
+  targetToFollow: {fileID: 0}
+  rocketRigidBody: {fileID: 3889429916329812435}
   turnSpeed: 1
+  explosionRadius: 5
+  explosionForce: 50
   rocketFlySpeed: 10
 --- !u!54 &3889429916329812435
 Rigidbody:

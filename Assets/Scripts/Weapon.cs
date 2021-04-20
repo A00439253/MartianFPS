@@ -9,9 +9,11 @@ public class Weapon : MonoBehaviour
     public float shootRate = 0.5f;
     public float shootRateTimestamp = 0.01f;
     public float shootForce = 1000f;
-
-    public GameObject bulletPrefab;
     public Transform weaponHolder;
+
+
+    public BulletTypes bulletTypes = BulletTypes.StraightBullet;
+    public GameObject bulletPrefab;
 
     void Update()
     {
@@ -26,12 +28,36 @@ public class Weapon : MonoBehaviour
 
     public void shoot()
     {
-        GameObject gObj = Instantiate(
-            bulletPrefab, 
-            weaponHolder.position, 
-            weaponHolder.rotation);
+        switch (bulletTypes)
+        {
+            case BulletTypes.None:
+                break;
+            case BulletTypes.StraightBullet:
+                {
+                    GameObject gObj = BulletFactory.customBullets[BulletTypes.StraightBullet].GetBulletInstance(weaponHolder.position,
+                        weaponHolder.rotation);
 
-        gObj.GetComponent<Rigidbody>().AddForce(weaponHolder.forward * shootForce);
-        shootRateTimestamp = Time.time + shootRate;
+                    gObj.GetComponent<Rigidbody>().AddForce(weaponHolder.forward * shootForce);
+                    shootRateTimestamp = Time.time + shootRate;
+                }
+                break;
+            case BulletTypes.StraightBomb:
+                break;
+            case BulletTypes.HomingMissile:
+                {
+                    GameObject gObj = BulletFactory.customBullets[BulletTypes.HomingMissile].GetBulletInstance(weaponHolder.position,
+                    weaponHolder.rotation);
+
+                    HomingMissile homingMissile = gObj.GetComponent<HomingMissile>();
+                    homingMissile.targetToFollow = Camera.main.transform;
+                    //homingMissile.targetToFollow = PlayerProperties.Instance.transform;
+
+
+                }
+                break;
+            default:
+                break;
+        }
+
     }
 }
