@@ -12,7 +12,6 @@ public class LookAt : MonoBehaviour
 
     public Weapon weapon;
 
-    bool bShootState = false;
 
     public float correctionAngle = 120;
 
@@ -54,8 +53,6 @@ public class LookAt : MonoBehaviour
         if(bToShoot) animator.SetBool("shoot", true);
         yield return new WaitForSeconds(fireDelay - 1.3f);
 
-
-        //bShootState = !bShootState;
 
         if (bToShoot)
         {
