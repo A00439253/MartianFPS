@@ -8,8 +8,11 @@ public class LookAt : MonoBehaviour
     public Transform target;
     public float damping = 2;
     public float fireDelay = 2;
+    public Animator animator;
 
     public Weapon weapon;
+
+    bool bShootState = false;
 
     public float correctionAngle = 120;
 
@@ -40,17 +43,23 @@ public class LookAt : MonoBehaviour
 
     IEnumerator TryShooting()
     {
-        yield return new WaitForSeconds(fireDelay);
+        animator.SetBool("shoot", false);
+        yield return new WaitForSeconds(1.3f);
 
         var rotation = Quaternion.LookRotation(target.position - transform.position);
         rotation *= Quaternion.Euler(0, correctionAngle, 0);
         float rotationDiff = (transform.rotation.eulerAngles.y - rotation.eulerAngles.y);
+        bool bToShoot = (rotationDiff < 1 && rotationDiff > -1);
 
-        if (rotationDiff < 1 && rotationDiff > -1)
+        if(bToShoot) animator.SetBool("shoot", true);
+        yield return new WaitForSeconds(fireDelay - 1.3f);
+
+
+        //bShootState = !bShootState;
+
+        if (bToShoot)
         {
-
             weapon.shoot();
-            //Debug.Log("Shooot!!!: " + rotationDiff);
             (CustomerProperty.customProperties[EnumProperties.ReduceHealth]).UpdateProperty();
         }
 
