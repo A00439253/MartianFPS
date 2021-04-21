@@ -29,6 +29,8 @@ public class ScoreManager : MonoBehaviour {
     }
 
 
+    public Scrollbar HealthBar;
+
     public enum ScoringItemsEnum
     {
         bulletsText = 0,
@@ -36,7 +38,6 @@ public class ScoreManager : MonoBehaviour {
         highScoreText,
         scoreText,
         healthText,
-        healthBar,
     }
 
     [System.Serializable]
@@ -143,6 +144,7 @@ public class ScoreManager : MonoBehaviour {
     public void UpdateHealth(int val)
     {
         scoreMapDictionary[ScoringItemsEnum.healthText].text.text = "" + val;
+        HealthBar.size = (float)((float)val / 100);
     }
 
     public void UpdateBullets(int val)
