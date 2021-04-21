@@ -22,20 +22,29 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public float destroyAfterDistance = -15f;
     public bool bIsGameOver = false;
     public bool bIsPaused = false;
-
     
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+
+	void Update ()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+            TogglePause();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void TogglePause()
     {
         bIsPaused = !bIsPaused;
+        Cursor.lockState = bIsPaused ? CursorLockMode.None : CursorLockMode.Locked;
+
+        AudioManager.Instance.PlaySfx(bIsPaused ? AudioManager.SFX_Enums.Pause : AudioManager.SFX_Enums.Resume);
+        UI_Manager.Instance.UpdateUI_State(bIsPaused ? UI_Manager.UI_States.Settings : UI_Manager.UI_States.Gameplay);
+
         Time.timeScale = bIsPaused ? 0 : 1;
     }
 

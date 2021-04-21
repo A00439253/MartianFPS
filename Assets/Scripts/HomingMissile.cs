@@ -50,6 +50,9 @@ public class HomingMissile : MonoBehaviour
 
             ExplosionEmulation();
 
+            if (collision.gameObject.tag == "Player")
+                (CustomerProperty.customProperties[EnumProperties.ReduceHealth]).UpdateProperty();
+
             //Deactivate Rocket..
             this.gameObject.SetActive(false);
         }

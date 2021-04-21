@@ -28,5 +28,6 @@ public class PlayerProperties : MonoBehaviour
 
     public int health = 100;
     public int bullets = 99;
+    public int goodies = 0;
 
 }

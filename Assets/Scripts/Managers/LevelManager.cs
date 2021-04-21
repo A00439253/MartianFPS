@@ -26,13 +26,27 @@ public class LevelManager : MonoBehaviour
 
 
     public List<string> defaultScenesToLoad;
+    public List<GameObject> gameObjectsToDeleteOnStartGame;
 
-    private void Start()
+
+    public void StartGame()
     {
+        UI_Manager.Instance.UpdateUI_State(UI_Manager.UI_States.None);
+
+
         foreach (string levelName in defaultScenesToLoad)
         {
             LoadScene(levelName);
         }
+
+        foreach (var gObj in gameObjectsToDeleteOnStartGame)
+        {
+            DestroyImmediate(gObj);
+        }
+
+        gameObjectsToDeleteOnStartGame.Clear();
+
+        UI_Manager.Instance.UpdateUI_State(UI_Manager.UI_States.Gameplay);
     }
 
     public void LoadScene(string sceneName)

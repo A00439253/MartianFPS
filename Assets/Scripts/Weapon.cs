@@ -18,11 +18,13 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if(bIsManual && Input.GetKey(KeyCode.Space))
+        if(bIsManual && (Input.GetMouseButtonDown(0)) && !GameManager.Instance.bIsPaused)
         {
             if (Time.time > shootRateTimestamp)
             {
                 shoot();
+                CustomerProperty.customProperties[EnumProperties.DecreaseBullets].UpdateProperty();
+
             }
         }
     }
@@ -51,9 +53,6 @@ public class Weapon : MonoBehaviour
 
                     HomingMissile homingMissile = gObj.GetComponent<HomingMissile>();
                     homingMissile.targetToFollow = Camera.main.transform;
-                    //homingMissile.targetToFollow = PlayerProperties.Instance.transform;
-
-
                 }
                 break;
             default:
