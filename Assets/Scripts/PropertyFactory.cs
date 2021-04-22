@@ -55,6 +55,7 @@ public class ReducePlayerHealthProperty : CustomerProperty
 
     public override void UpdateProperty()
     {
+        if(ScoreManager.Instance)
         ScoreManager.Instance.UpdateHealth(--PlayerProperties.Instance.health);
     }
 }

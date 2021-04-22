@@ -6,6 +6,12 @@ public class HomingMissile : MonoBehaviour
 {
     public Transform targetToFollow;
     public Rigidbody rocketRigidBody;
+    public GameObject particleObj;
+    public GameObject rocketMesh;
+
+    public AudioSource audioSource;
+
+    public float delayToDestroyObj = 3f;
 
     public float turnSpeed = 1f;
     public float explosionRadius = 5f;
@@ -54,8 +60,31 @@ public class HomingMissile : MonoBehaviour
                 (CustomerProperty.customProperties[EnumProperties.ReduceHealth]).UpdateProperty();
 
             //Deactivate Rocket..
-            this.gameObject.SetActive(false);
+            rocketMesh.SetActive(false);
+            particleObj.SetActive(true);
+
+            StartCoroutine("DestroyMissile");
+            StartCoroutine("DestroyRigidBody");
         }
+    }
+
+
+
+    IEnumerator DestroyRigidBody()
+    {
+
+        audioSource.Play();
+
+        if (rocketRigidBody == null) yield return null;
+
+        yield return new WaitForSeconds(0.2f);
+        DestroyImmediate(rocketRigidBody);
+    }
+
+    IEnumerator DestroyMissile()
+    {
+        yield return new WaitForSeconds(delayToDestroyObj);
+        DestroyImmediate(gameObject);
     }
 
     private void ExplosionEmulation()

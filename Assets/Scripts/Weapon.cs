@@ -10,6 +10,9 @@ public class Weapon : MonoBehaviour
     public float shootRateTimestamp = 0.01f;
     public float shootForce = 1000f;
     public Transform weaponHolder;
+    public AudioSource audioSource;
+    public AudioClip straightBulletLaunchClip;
+    public AudioClip homingMissileLaunchClip;
 
 
     public BulletTypes bulletTypes = BulletTypes.StraightBullet;
@@ -42,6 +45,8 @@ public class Weapon : MonoBehaviour
 
                     gObj.GetComponent<Rigidbody>().AddForce(weaponHolder.forward * shootForce);
                     shootRateTimestamp = Time.time + shootRate;
+                    audioSource.clip = straightBulletLaunchClip;
+                    audioSource.Play();
                 }
                 break;
             case BulletTypes.StraightBomb:
@@ -53,6 +58,9 @@ public class Weapon : MonoBehaviour
 
                     HomingMissile homingMissile = gObj.GetComponent<HomingMissile>();
                     homingMissile.targetToFollow = Camera.main.transform;
+
+                    audioSource.clip = homingMissileLaunchClip;
+                    audioSource.Play();
                 }
                 break;
             default:
