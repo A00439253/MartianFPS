@@ -11,12 +11,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float verticalBottomClamp = 80f;
     [SerializeField] float playerSpeed = 5f;
     [SerializeField] float mouseSensitivity = 45f;
+    [SerializeField] float jumpHeight = 3f;
+    [SerializeField] float groundDistance = 0.4f;
     [SerializeField] Camera playerCamera;
     [SerializeField] CharacterController mCharacterController;
 
 
     private float camX_rot = 0f;
     private Vector3 playerGravityVelocity;
+
+    bool bIsGrounded = false;
+    public Transform groundCheck;
+    public LayerMask groundMask;
 
     void Start()
     {
@@ -41,6 +47,11 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(camX_rot, 0, 0);
         //Player rotation along with Cam.
         transform.Rotate(Vector3.up * mouseX * 3);
+
+        bIsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (Input.GetButtonDown("Jump") && bIsGrounded)
+            playerGravityVelocity.y = Mathf.Sqrt(jumpHeight * -2f * -9.18f);
+
     }
 
     private void FixedUpdate()
