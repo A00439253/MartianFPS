@@ -9,6 +9,8 @@ public class Goodie : MonoBehaviour
     public GameObject goodieObj;
     public GameObject vfxObj;
 
+    public bool bFinalGoodie = false;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,6 +28,12 @@ public class Goodie : MonoBehaviour
     IEnumerator DestroyGoodie()
     {
         yield return new WaitForSeconds(timeToPlayVFX);
+
+        if (bFinalGoodie)
+        {
+            CustomerProperty.customProperties[EnumProperties.PlayerWins].UpdateProperty();
+        }
+
         DestroyImmediate(gameObject);
     }
 }

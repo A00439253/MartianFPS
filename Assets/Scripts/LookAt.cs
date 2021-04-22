@@ -5,6 +5,8 @@ using UnityEngine;
 public class LookAt : MonoBehaviour
 {
 
+    public GameObject particleObj;
+
     public Transform target;
     public float damping = 2;
     public float fireDelay = 2;
@@ -13,12 +15,18 @@ public class LookAt : MonoBehaviour
     public Weapon weapon;
 
 
+
+
     public float correctionAngle = 120;
 
     public bool bFreezeXZ = false;
 
     private void Start()
     {
+        if (target == null)
+        {
+            target = PlayerProperties.Instance.gameObject.transform;
+        }
         StartCoroutine("TryShooting");
     }
 
@@ -38,6 +46,15 @@ public class LookAt : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ammo")
+        {
+            particleObj.SetActive(true);
+            this.gameObject.SetActive(false);
+        }
+    }
 
 
     IEnumerator TryShooting()

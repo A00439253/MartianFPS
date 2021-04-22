@@ -27,9 +27,9 @@ public class UI_Manager : MonoBehaviour
     {
         None = 0,
         GameStart,
-        GameOver,
         Gameplay,
         Settings,
+        GameExit,
 
     }
 
@@ -47,6 +47,10 @@ public class UI_Manager : MonoBehaviour
     //UI_States nextUI_State = UI_States.GameStart;
 
 
+    public UI_States CurrentUIState()
+    {
+        return currentUI_State;
+    }
 
     private void Start()
     {

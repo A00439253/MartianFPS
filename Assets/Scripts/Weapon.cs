@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour
     public AudioSource audioSource;
     public GameObject shootVFXPrefab;
 
+
     public AudioClip straightBulletLaunchClip;
     public AudioClip homingMissileLaunchClip;
 
@@ -23,7 +24,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if(bIsManual && (Input.GetMouseButtonDown(0)))// && !GameManager.Instance.bIsPaused)
+        if(bIsManual && (Input.GetMouseButtonDown(0))) && !GameManager.Instance.bIsPaused)
         {
             if (Time.time > shootRateTimestamp)
             {
@@ -44,6 +45,11 @@ public class Weapon : MonoBehaviour
                 {
                     GameObject gObj = BulletFactory.customBullets[BulletTypes.StraightBullet].GetBulletInstance(weaponHolder.position,
                         weaponHolder.rotation);
+                    if (!bIsManual) gObj.tag = "Untagged";
+
+                    if(LevelManager.Instance)
+                    gObj.transform.parent = LevelManager.Instance.toBeDeletedContainer;
+
 
                     gObj.GetComponent<Rigidbody>().AddForce(weaponHolder.forward * shootForce);
                     shootRateTimestamp = Time.time + shootRate;
@@ -67,6 +73,12 @@ public class Weapon : MonoBehaviour
                 {
                     GameObject gObj = BulletFactory.customBullets[BulletTypes.HomingMissile].GetBulletInstance(weaponHolder.position,
                     weaponHolder.rotation);
+
+                    if (!bIsManual) gObj.tag = "Untagged";
+
+                    if (LevelManager.Instance)
+                    gObj.transform.parent = LevelManager.Instance.toBeDeletedContainer;
+
 
                     HomingMissile homingMissile = gObj.GetComponent<HomingMissile>();
                     homingMissile.targetToFollow = Camera.main.transform;

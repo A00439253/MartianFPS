@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         if(playerCamera == null)    playerCamera = Camera.main;
         mCharacterController = GetComponent<CharacterController>();
+        if(LevelManager.Instance)
+        LevelManager.Instance.DisableExtraGameObjects();
+        if(UI_Manager.Instance)
+        UI_Manager.Instance.UpdateUI_State(UI_Manager.UI_States.Gameplay);
 
     }
 

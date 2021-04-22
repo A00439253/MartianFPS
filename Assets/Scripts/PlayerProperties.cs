@@ -19,15 +19,15 @@ public class PlayerProperties : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+           // DontDestroyOnLoad(this.gameObject);
         }
     }
-
-
 
 
     public int health = 100;
     public int bullets = 99;
     public int goodies = 0;
+    public bool bHasGameWon = false;
+    public bool bGameHasRestarted = false;
 
 }

@@ -37,6 +37,7 @@ public class HomingMissile : MonoBehaviour
     private void FixedUpdate()
     {
         if (!rocketRigidBody) return;
+        if (!targetToFollow) return;
 
         rocketRigidBody.velocity = rocketLocalTrans.forward * rocketFlySpeed;
 

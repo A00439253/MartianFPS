@@ -37,8 +37,21 @@ public class GameManager : MonoBehaviour {
         Application.Quit();
     }
 
+    public void RestartGame()
+    {
+        //PlayerProperties.Instance.bGameHasRestarted = true;
+        if (PlayerProperties.Instance != null && PlayerProperties.Instance.gameObject != null)
+        {
+            DestroyImmediate(PlayerProperties.Instance.gameObject);
+        }
+        LevelManager.Instance.GameRestart();
+    }
+
     public void TogglePause()
     {
+
+        if (UI_Manager.Instance.CurrentUIState() == UI_Manager.UI_States.GameStart) return;
+
         bIsPaused = !bIsPaused;
         Cursor.lockState = bIsPaused ? CursorLockMode.None : CursorLockMode.Locked;
 

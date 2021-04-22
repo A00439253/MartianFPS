@@ -38,6 +38,7 @@ public class ScoreManager : MonoBehaviour {
         highScoreText,
         scoreText,
         healthText,
+        gameExit,
     }
 
     [System.Serializable]
@@ -51,12 +52,6 @@ public class ScoreManager : MonoBehaviour {
     public ScoreMapping[] scoreMappingForType;
     Dictionary<ScoringItemsEnum, ScoreMapping> scoreMapDictionary;
 
- // int bullets = 0;
- // int health = 0;
- // int goodies = 0;
- // int scoreStep = 2;
- // int highScore = 0;
- // float scoreMultiplier = 1;
 
     private void Init()
     {
@@ -101,45 +96,21 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
-    /*
     // Use this for initialization
 
     public void SaveHighScore()
     {
-            PlayerPrefs.SetInt("Score", Score);
-            if (Score >= HighScore)
-            {
-                highScore = Score;
-                PlayerPrefs.SetInt(GetTextForScoringItems(ScoringItemsEnum.bulletsText), bullets);
-            }
+        int currentScore = CalculateScore();
+        if (currentScore > GetHighScore())
+        {
+            PlayerPrefs.SetInt(GetTextForScoringItems(ScoringItemsEnum.highScoreText), currentScore);
+        }
     }
 
-
-    public IEnumerator UpdateScore()
+    public int GetHighScore()
     {
-        yield return new WaitForSeconds(1);
-        if (!GameManager.Instance.bIsGameOver)
-        {
-            score += scoreStep * (int)scoreMultiplier;
-            scoreMultiplier += 0.1f;
-        }
-        if (!GameManager.Instance.bIsGameOver)
-        {
-            StartCoroutine(UpdateScore());
-        }
+        return PlayerPrefs.GetInt(GetTextForScoringItems(ScoringItemsEnum.highScoreText));
     }
-
-    public void AddScore(ScoringItemsEnum value)
-    {
-        foreach (ScoreMapping pair in scoreMappingForType)
-        {
-            if (pair.index == value)
-            {
-                score += pair.score;
-            }
-        }
-    }
-     */
 
     public void UpdateHealth(int val)
     {
@@ -157,15 +128,40 @@ public class ScoreManager : MonoBehaviour {
         scoreMapDictionary[ScoringItemsEnum.goodiesText].text.text = "" + val;
     }
 
+    public void UpdateGameExitText(string val)
+    {
+        scoreMapDictionary[ScoringItemsEnum.gameExit].text.text = val;
+    }
+
+    public void UpdateScore()
+    {
+        scoreMapDictionary[ScoringItemsEnum.scoreText].text.text = "" + CalculateScore();
+    }
+
+    public void UpdateHighScore()
+    {
+        scoreMapDictionary[ScoringItemsEnum.highScoreText].text.text = "" + GetHighScore();
+    }
+    
+
+    public void UpdateGameExitText(bool bWon)
+    {
+        scoreMapDictionary[ScoringItemsEnum.gameExit].text.text = bWon ? "You Won!!!" : "Better Luck next time!!";
+    }
+
     string GetTextForScoringItems(ScoringItemsEnum scoringItemsEnum)
     {
         switch (scoringItemsEnum)
         {
-            case ScoringItemsEnum.bulletsText:  return "Bullets";
-            case ScoringItemsEnum.goodiesText:  return "Goodies";
-            default:                            return "None";
+            case ScoringItemsEnum.highScoreText:    return "HighScore";
+            case ScoringItemsEnum.goodiesText:      return "Goodies";
+            default:                                return "None";
         }
     }
 
-
+    public int CalculateScore()
+    {
+        return (PlayerProperties.Instance.bullets + 1) *
+            (PlayerProperties.Instance.goodies + 1);
+    }
 }

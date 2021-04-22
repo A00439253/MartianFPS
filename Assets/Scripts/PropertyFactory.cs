@@ -16,6 +16,9 @@ public class PropertyFactory : MonoBehaviour
         DecreasePlayerBulletsProperty decreasePlayerBulletsProperty = new DecreasePlayerBulletsProperty();
 
         IncreasePlayerGoodiesProperty increasePlayerGoodiesProperty = new IncreasePlayerGoodiesProperty();
+
+        PlayerWinProperty playerWinProperty = new PlayerWinProperty();
+        PlayerLostProperty playerLost = new PlayerLostProperty();
     }
 
 }
@@ -29,6 +32,8 @@ public enum EnumProperties
     DecreaseBullets,
     IncreaseBullets,
     IncreaseGoodies,
+    PlayerWins,
+    PlayerLost,
 };
 
 
@@ -57,6 +62,11 @@ public class ReducePlayerHealthProperty : CustomerProperty
     {
         if(ScoreManager.Instance)
         ScoreManager.Instance.UpdateHealth(--PlayerProperties.Instance.health);
+
+        if (PlayerProperties.Instance.health <= 0)
+        {
+            CustomerProperty.customProperties[EnumProperties.PlayerLost].UpdateProperty();
+        }
     }
 }
 
@@ -103,5 +113,49 @@ public class IncreasePlayerGoodiesProperty : CustomerProperty
         PlayerProperties.Instance.goodies+=20;
         ScoreManager.Instance.UpdateGoodies(PlayerProperties.Instance.goodies);
 
+    }
+}
+
+
+public class PlayerWinProperty : CustomerProperty
+{
+    public override EnumProperties propertyName => EnumProperties.PlayerWins;
+
+    public override void UpdateProperty()
+    {
+        CustomerProperty.customProperties[EnumProperties.IncreaseGoodies].UpdateProperty();
+        CustomerProperty.customProperties[EnumProperties.IncreaseGoodies].UpdateProperty();
+        PlayerProperties.Instance.bHasGameWon = true;
+        LevelManager.Instance.GameExitScene();
+        UI_Manager.Instance.UpdateUI_State(UI_Manager.UI_States.GameExit);
+
+
+        ScoreManager.Instance.UpdateScore();
+        ScoreManager.Instance.UpdateHighScore();
+        ScoreManager.Instance.SaveHighScore();
+
+        ScoreManager.Instance.UpdateGameExitText(true);
+
+        Cursor.lockState =  CursorLockMode.None ;
+    }
+}
+
+public class PlayerLostProperty : CustomerProperty
+{
+    public override EnumProperties propertyName => EnumProperties.PlayerLost;
+
+    public override void UpdateProperty()
+    {
+        PlayerProperties.Instance.bHasGameWon = false;
+        LevelManager.Instance.GameExitScene();
+        UI_Manager.Instance.UpdateUI_State(UI_Manager.UI_States.GameExit);
+        Cursor.lockState =  CursorLockMode.None ;
+
+
+        ScoreManager.Instance.UpdateScore();
+        ScoreManager.Instance.UpdateHighScore();
+        ScoreManager.Instance.SaveHighScore();
+
+        ScoreManager.Instance.UpdateGameExitText(false);
     }
 }

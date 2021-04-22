@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuickTestScenes/TeestHostStartScene.unity
     guid: 5e8d80c31464bd546944ee44e43a2c59
+  - enabled: 1
+    path: Assets/Scenes/sample1.unity
+    guid: e3ce7e782676e1646baaa3ac28ea54b4
+  - enabled: 1
+    path: Assets/Scenes/ExitScene.unity
+    guid: c90e4cecb61aee84d99e3228e1ed9934
   m_configObjects: {}
