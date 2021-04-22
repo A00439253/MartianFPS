@@ -11,6 +11,8 @@ public class Weapon : MonoBehaviour
     public float shootForce = 1000f;
     public Transform weaponHolder;
     public AudioSource audioSource;
+    public GameObject shootVFXPrefab;
+
     public AudioClip straightBulletLaunchClip;
     public AudioClip homingMissileLaunchClip;
 
@@ -21,7 +23,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if(bIsManual && (Input.GetMouseButtonDown(0)) && !GameManager.Instance.bIsPaused)
+        if(bIsManual && (Input.GetMouseButtonDown(0)))// && !GameManager.Instance.bIsPaused)
         {
             if (Time.time > shootRateTimestamp)
             {
@@ -45,6 +47,16 @@ public class Weapon : MonoBehaviour
 
                     gObj.GetComponent<Rigidbody>().AddForce(weaponHolder.forward * shootForce);
                     shootRateTimestamp = Time.time + shootRate;
+
+                    if (shootVFXPrefab)
+                    {
+                        shootVFXPrefab.SetActive(true);
+
+                        //var flash = 
+                            Instantiate(shootVFXPrefab, weaponHolder.transform);
+                       // StartCoroutine("DisableShootVFX");
+                    }
+
                     audioSource.clip = straightBulletLaunchClip;
                     audioSource.Play();
                 }
@@ -68,4 +80,6 @@ public class Weapon : MonoBehaviour
         }
 
     }
+
+
 }

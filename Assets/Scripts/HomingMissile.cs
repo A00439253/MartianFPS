@@ -22,6 +22,8 @@ public class HomingMissile : MonoBehaviour
 
     void Start()
     {
+        particleObj.SetActive(false);
+
         if (!targetToFollow)
         {
             //TODO : Cache player and set Target to follow at runtime
