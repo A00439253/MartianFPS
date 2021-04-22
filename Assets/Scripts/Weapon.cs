@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if(bIsManual && (Input.GetMouseButtonDown(0))) && !GameManager.Instance.bIsPaused)
+        if(bIsManual && Input.GetMouseButtonDown(0) && !GameManager.Instance.bIsPaused)
         {
             if (Time.time > shootRateTimestamp)
             {
