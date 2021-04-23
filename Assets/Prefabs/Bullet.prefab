@@ -210,7 +210,7 @@ MonoBehaviour:
   audioSource: {fileID: 6494016306475463721}
   bulletRigidBody: {fileID: 7768352006245546861}
   delayToDestroyObj: 3
-  explosionForce: 2000
+  explosionForce: 5500
   explosionRadius: 3
 --- !u!1 &2976083872725230041
 GameObject:

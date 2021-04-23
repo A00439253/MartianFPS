@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
 
     public bool bIsGameOver = false;
     public bool bIsPaused = false;
-    
 
 	void Update ()
     {
@@ -45,6 +44,7 @@ public class GameManager : MonoBehaviour {
             DestroyImmediate(PlayerProperties.Instance.gameObject);
         }
         LevelManager.Instance.GameRestart();
+        Physics.autoSimulation = true;
     }
 
     public void TogglePause()

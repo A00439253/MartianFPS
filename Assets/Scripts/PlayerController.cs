@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerGravityVelocity;
 
     bool bIsGrounded = false;
+    public GameObject gunObject;
     public Transform groundCheck;
     public LayerMask groundMask;
 
@@ -34,6 +35,20 @@ public class PlayerController : MonoBehaviour
         if(UI_Manager.Instance)
         UI_Manager.Instance.UpdateUI_State(UI_Manager.UI_States.Gameplay);
 
+        gunObject.SetActive(false);
+        PlayerProperties.Instance.PlayerControllerInstance = this;
+
+
+        PlayerProperties.Instance.bHasGameWon = false;
+
+        ScoreManager.Instance.GameHasStarted();
+
+   //     PlayerProperties.Instance.health = 100;
+   //     PlayerProperties.Instance.bullets = 99;
+   //     PlayerProperties.Instance.goodies = 0;
+   //     ScoreManager.Instance.UpdateBullets(PlayerProperties.Instance.bullets);
+   //     ScoreManager.Instance.UpdateHealth(PlayerProperties.Instance.health);
+   //     ScoreManager.Instance.UpdateGoodies(PlayerProperties.Instance.goodies);
     }
 
     void Update()
@@ -69,6 +84,11 @@ public class PlayerController : MonoBehaviour
             playerGravityVelocity.y += -9.18f * Time.deltaTime;
             mCharacterController.Move(playerGravityVelocity * Time.deltaTime);
         }
+    }
+
+    public void ActivateGun()
+    {
+        gunObject.SetActive(true);
     }
 
     private void PlayerMovement()

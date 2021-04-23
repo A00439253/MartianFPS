@@ -19,6 +19,7 @@ public class PropertyFactory : MonoBehaviour
 
         PlayerWinProperty playerWinProperty = new PlayerWinProperty();
         PlayerLostProperty playerLost = new PlayerLostProperty();
+        PlayerGiveGunProperty playerGiveGunProperty = new PlayerGiveGunProperty();
     }
 
 }
@@ -34,6 +35,7 @@ public enum EnumProperties
     IncreaseGoodies,
     PlayerWins,
     PlayerLost,
+    GiveGun,
 };
 
 
@@ -134,7 +136,9 @@ public class PlayerWinProperty : CustomerProperty
         ScoreManager.Instance.UpdateHighScore();
         ScoreManager.Instance.SaveHighScore();
 
+        AudioManager.Instance.PlayMusic(AudioManager.BGMusic_Enums.GameWin);
         ScoreManager.Instance.UpdateGameExitText(true);
+        Physics.autoSimulation = false;
 
         Cursor.lockState =  CursorLockMode.None ;
     }
@@ -155,7 +159,19 @@ public class PlayerLostProperty : CustomerProperty
         ScoreManager.Instance.UpdateScore();
         ScoreManager.Instance.UpdateHighScore();
         ScoreManager.Instance.SaveHighScore();
+        AudioManager.Instance.PlayMusic(AudioManager.BGMusic_Enums.GameLost);
 
         ScoreManager.Instance.UpdateGameExitText(false);
+    }
+}
+
+public class PlayerGiveGunProperty : CustomerProperty
+{
+    public override EnumProperties propertyName => EnumProperties.GiveGun;
+
+    public override void UpdateProperty()
+    {
+        PlayerProperties.Instance.bHasGun = true;
+        PlayerProperties.Instance.PlayerControllerInstance.ActivateGun();
     }
 }
