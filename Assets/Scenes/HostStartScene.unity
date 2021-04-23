@@ -127,6 +127,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2240576924253007144}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &934781735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8876638407009171460, guid: a999825997433cb4e995f0b851cad9ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 2240576924253007144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1054715210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8876638407009099170, guid: a999825997433cb4e995f0b851cad9ba,
@@ -377,12 +383,12 @@ PrefabInstance:
     - target: {fileID: 4607439504391470763, guid: a999825997433cb4e995f0b851cad9ba,
         type: 3}
       propertyPath: uiMap.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4607439504391470763, guid: a999825997433cb4e995f0b851cad9ba,
         type: 3}
       propertyPath: uiMap.Array.data[4].index
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4607439504391470763, guid: a999825997433cb4e995f0b851cad9ba,
         type: 3}
@@ -394,6 +400,11 @@ PrefabInstance:
       propertyPath: uiMap.Array.data[3].gameObject
       value: 
       objectReference: {fileID: 279352965}
+    - target: {fileID: 4607439504391470763, guid: a999825997433cb4e995f0b851cad9ba,
+        type: 3}
+      propertyPath: uiMap.Array.data[4].gameObject
+      value: 
+      objectReference: {fileID: 934781735}
     - target: {fileID: 8876638406986699380, guid: a999825997433cb4e995f0b851cad9ba,
         type: 3}
       propertyPath: m_LocalPosition.z
