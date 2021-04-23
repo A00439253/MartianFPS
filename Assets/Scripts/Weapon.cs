@@ -6,6 +6,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
 
+    public float straightBulletRange = 8f;
     public float shootRate = 0.5f;
     public float shootRateTimestamp = 0.01f;
     public float shootForce = 1000f;
@@ -37,6 +38,14 @@ public class Weapon : MonoBehaviour
 
     public void shoot()
     {
+        if (!bIsManual)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, PlayerProperties.Instance.gameObject.transform.position);
+            
+            bulletTypes = (distanceToPlayer < straightBulletRange) ?
+                BulletTypes.StraightBullet : BulletTypes.HomingMissile;
+
+        }
         switch (bulletTypes)
         {
             case BulletTypes.None:

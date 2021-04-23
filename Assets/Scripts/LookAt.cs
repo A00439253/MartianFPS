@@ -74,7 +74,6 @@ public class LookAt : MonoBehaviour
         if (bToShoot)
         {
             weapon.shoot();
-            (CustomerProperty.customProperties[EnumProperties.ReduceHealth]).UpdateProperty();
         }
 
         StartCoroutine("TryShooting");
