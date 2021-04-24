@@ -20,7 +20,7 @@ public class Goodie : MonoBehaviour
             goodieObj.SetActive(false);
             StartCoroutine("DestroyGoodie");
             vfxObj.SetActive(true);
-            CustomerProperty.customProperties[EnumProperties.IncreaseGoodies].UpdateProperty();
+            CustomProperty.customProperties[EnumProperties.IncreaseGoodies].UpdateProperty();
         }
     }
 
@@ -31,7 +31,7 @@ public class Goodie : MonoBehaviour
 
         if (bFinalGoodie)
         {
-            CustomerProperty.customProperties[EnumProperties.PlayerWins].UpdateProperty();
+            CustomProperty.customProperties[EnumProperties.PlayerWins].UpdateProperty();
         }
 
         DestroyImmediate(gameObject);

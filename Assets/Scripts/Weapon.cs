@@ -6,7 +6,8 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
 
-    public float straightBulletRange = 8f;
+    public float straightBulletRange = 14f;
+    public float missileRange = 140f;
     public float shootRate = 0.5f;
     public float shootRateTimestamp = 0.01f;
     public float shootForce = 1000f;
@@ -30,7 +31,7 @@ public class Weapon : MonoBehaviour
             if (Time.time > shootRateTimestamp)
             {
                 shoot();
-                CustomerProperty.customProperties[EnumProperties.DecreaseBullets].UpdateProperty();
+                CustomProperty.customProperties[EnumProperties.DecreaseBullets].UpdateProperty();
 
             }
         }
@@ -38,14 +39,16 @@ public class Weapon : MonoBehaviour
 
     public void shoot()
     {
+
+        float distanceToPlayer = Vector3.Distance(transform.position, PlayerProperties.Instance.gameObject.transform.position);
         if (!bIsManual)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, PlayerProperties.Instance.gameObject.transform.position);
-            
             bulletTypes = (distanceToPlayer < straightBulletRange) ?
                 BulletTypes.StraightBullet : BulletTypes.HomingMissile;
-
         }
+
+        if (distanceToPlayer > missileRange) return;
+
         switch (bulletTypes)
         {
             case BulletTypes.None:

@@ -29,5 +29,7 @@ public class PlayerProperties : MonoBehaviour
     public int goodies = 0;
     public bool bHasGameWon = false;
     public bool bGameHasRestarted = false;
+    public bool bHasGun = false;
+    public PlayerController PlayerControllerInstance;
 
 }

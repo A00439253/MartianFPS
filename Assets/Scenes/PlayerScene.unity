@@ -198,12 +198,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699876802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.56500053, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.601, z: 0}
+  m_LocalScale: {x: 1, y: 0.6830601, z: 1}
   m_Children:
   - {fileID: 2101662525}
   m_Father: {fileID: 932689063}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 11.104, y: 141.17201, z: 0}
 --- !u!1 &932689058
 GameObject:
@@ -247,6 +247,7 @@ MonoBehaviour:
   groundDistance: 0.4
   playerCamera: {fileID: 699876804}
   mCharacterController: {fileID: 0}
+  gunObject: {fileID: 2101662524}
   groundCheck: {fileID: 2112216788}
   groundMask:
     serializedVersion: 2
@@ -324,11 +325,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932689058}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5690002, y: 1.99, z: -6.465}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.34, y: 1.755, z: 0.23}
+  m_LocalScale: {x: 1, y: 1.464, z: 1}
   m_Children:
-  - {fileID: 2112216788}
   - {fileID: 699876805}
+  - {fileID: 2112216788}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -348,6 +349,9 @@ MonoBehaviour:
   bullets: 99
   goodies: 0
   bHasGameWon: 0
+  bGameHasRestarted: 0
+  bHasGun: 0
+  PlayerControllerInstance: {fileID: 0}
 --- !u!54 &932689065
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -472,6 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ca517d2f22eac438a173964bfad180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  straightBulletRange: 14
   shootRate: 0.5
   shootRateTimestamp: 0.01
   shootForce: 2000
@@ -724,7 +729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2101662525
 Transform:
   m_ObjectHideFlags: 0
@@ -770,7 +775,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 932689063}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &195002085653753580
 MeshFilter:

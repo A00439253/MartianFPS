@@ -35,9 +35,20 @@ public class LevelManager : MonoBehaviour
     public string exitScene;
     public string startScene;
 
+    public GameObject rayFireManagerPrefab;
+
+    private void Start()
+    {
+        AudioManager.Instance.PlayMusic(AudioManager.BGMusic_Enums.Intro);
+    }
 
     public void StartGame()
     {
+        AudioManager.Instance.PlayMusic(AudioManager.BGMusic_Enums.GameMusic);
+
+        GameObject rayfireManagerInstance = Instantiate(rayFireManagerPrefab);
+        rayfireManagerInstance.transform.parent = toBeDeletedContainer;
+
         UI_Manager.Instance.UpdateUI_State(UI_Manager.UI_States.None);
         currentlyLoadedScenes = new List<string>();
 
@@ -78,6 +89,8 @@ public class LevelManager : MonoBehaviour
 
     public void GameRestart()
     {
+        AudioManager.Instance.PlayMusic(AudioManager.BGMusic_Enums.Intro);
+
         if (GameManager.Instance.bIsPaused) GameManager.Instance.TogglePause();
         Cursor.lockState = CursorLockMode.None;
 

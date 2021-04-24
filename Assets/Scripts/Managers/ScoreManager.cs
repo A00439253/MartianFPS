@@ -77,6 +77,10 @@ public class ScoreManager : MonoBehaviour {
             scoreMapDictionary.Add(scoreMap.index, scoreMap);
         }
 
+    }
+
+    public void GameHasStarted()
+    {
         StartCoroutine("UpdatePlayerUI");
 
     }
@@ -84,7 +88,7 @@ public class ScoreManager : MonoBehaviour {
 
     IEnumerator UpdatePlayerUI()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.1f);
         if (PlayerProperties.Instance != null)
         {
             UpdateBullets(PlayerProperties.Instance.bullets);

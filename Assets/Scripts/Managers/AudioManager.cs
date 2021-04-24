@@ -65,7 +65,8 @@ public class AudioManager : MonoBehaviour {
     {
         Intro = 0,
         GameMusic,
-        GameOver
+        GameLost,
+        GameWin
     }
 
     public void PlaySfx(SFX_Enums value)
