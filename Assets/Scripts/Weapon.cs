@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
             if (Time.time > shootRateTimestamp)
             {
                 shoot();
-                CustomerProperty.customProperties[EnumProperties.DecreaseBullets].UpdateProperty();
+                CustomProperty.customProperties[EnumProperties.DecreaseBullets].UpdateProperty();
 
             }
         }

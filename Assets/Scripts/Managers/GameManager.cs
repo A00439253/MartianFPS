@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour {
 
     public void RestartGame()
     {
-        //PlayerProperties.Instance.bGameHasRestarted = true;
         if (PlayerProperties.Instance != null && PlayerProperties.Instance.gameObject != null)
         {
             DestroyImmediate(PlayerProperties.Instance.gameObject);

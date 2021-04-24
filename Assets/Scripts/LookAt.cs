@@ -76,7 +76,7 @@ public class LookAt : MonoBehaviour
             if(weapon.gameObject.activeSelf)
             {
                 weapon.shoot();
-                (CustomerProperty.customProperties[EnumProperties.ReduceHealth]).UpdateProperty();
+                (CustomProperty.customProperties[EnumProperties.ReduceHealth]).UpdateProperty();
             }
         }
 

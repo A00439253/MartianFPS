@@ -12,7 +12,7 @@ public class UpdatePropertyOnTrigger : MonoBehaviour
     {
         if (other.CompareTag(tagToCompare))
         {
-            (CustomerProperty.customProperties[propertyToUpdate]).UpdateProperty();
+            (CustomProperty.customProperties[propertyToUpdate]).UpdateProperty();
         }
     }
 }

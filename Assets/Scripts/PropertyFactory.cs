@@ -39,13 +39,13 @@ public enum EnumProperties
 };
 
 
-public abstract class CustomerProperty
+public abstract class CustomProperty
 {
-    public static Dictionary<EnumProperties, CustomerProperty> customProperties;
+    public static Dictionary<EnumProperties, CustomProperty> customProperties;
 
-    public CustomerProperty()
+    public CustomProperty()
     {
-        if (customProperties == null) customProperties = new Dictionary<EnumProperties, CustomerProperty>();
+        if (customProperties == null) customProperties = new Dictionary<EnumProperties, CustomProperty>();
 
         customProperties.Add(propertyName, this);
     }
@@ -56,7 +56,7 @@ public abstract class CustomerProperty
     
 }
 
-public class ReducePlayerHealthProperty : CustomerProperty
+public class ReducePlayerHealthProperty : CustomProperty
 {
     public override EnumProperties propertyName => EnumProperties.ReduceHealth;
 
@@ -67,13 +67,13 @@ public class ReducePlayerHealthProperty : CustomerProperty
 
         if (PlayerProperties.Instance.health <= 0)
         {
-            CustomerProperty.customProperties[EnumProperties.PlayerLost].UpdateProperty();
+            CustomProperty.customProperties[EnumProperties.PlayerLost].UpdateProperty();
         }
     }
 }
 
 
-public class IncreasePlayerHealthProperty : CustomerProperty
+public class IncreasePlayerHealthProperty : CustomProperty
 {
     public override EnumProperties propertyName => EnumProperties.IncreaseHealth;
 
@@ -84,7 +84,7 @@ public class IncreasePlayerHealthProperty : CustomerProperty
     }
 }
 
-public class DecreasePlayerBulletsProperty : CustomerProperty
+public class DecreasePlayerBulletsProperty : CustomProperty
 {
     public override EnumProperties propertyName => EnumProperties.DecreaseBullets;
 
@@ -94,7 +94,7 @@ public class DecreasePlayerBulletsProperty : CustomerProperty
     }
 }
 
-public class IncreasePlayerBulletsProperty : CustomerProperty
+public class IncreasePlayerBulletsProperty : CustomProperty
 {
     public override EnumProperties propertyName => EnumProperties.IncreaseBullets;
 
@@ -106,7 +106,7 @@ public class IncreasePlayerBulletsProperty : CustomerProperty
     }
 }
 
-public class IncreasePlayerGoodiesProperty : CustomerProperty
+public class IncreasePlayerGoodiesProperty : CustomProperty
 {
     public override EnumProperties propertyName => EnumProperties.IncreaseGoodies;
 
@@ -119,14 +119,14 @@ public class IncreasePlayerGoodiesProperty : CustomerProperty
 }
 
 
-public class PlayerWinProperty : CustomerProperty
+public class PlayerWinProperty : CustomProperty
 {
     public override EnumProperties propertyName => EnumProperties.PlayerWins;
 
     public override void UpdateProperty()
     {
-        CustomerProperty.customProperties[EnumProperties.IncreaseGoodies].UpdateProperty();
-        CustomerProperty.customProperties[EnumProperties.IncreaseGoodies].UpdateProperty();
+        CustomProperty.customProperties[EnumProperties.IncreaseGoodies].UpdateProperty();
+        CustomProperty.customProperties[EnumProperties.IncreaseGoodies].UpdateProperty();
         PlayerProperties.Instance.bHasGameWon = true;
         LevelManager.Instance.GameExitScene();
         UI_Manager.Instance.UpdateUI_State(UI_Manager.UI_States.GameExit);
@@ -144,7 +144,7 @@ public class PlayerWinProperty : CustomerProperty
     }
 }
 
-public class PlayerLostProperty : CustomerProperty
+public class PlayerLostProperty : CustomProperty
 {
     public override EnumProperties propertyName => EnumProperties.PlayerLost;
 
@@ -165,7 +165,7 @@ public class PlayerLostProperty : CustomerProperty
     }
 }
 
-public class PlayerGiveGunProperty : CustomerProperty
+public class PlayerGiveGunProperty : CustomProperty
 {
     public override EnumProperties propertyName => EnumProperties.GiveGun;
 
